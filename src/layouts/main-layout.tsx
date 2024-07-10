@@ -24,7 +24,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           <li className="bg-gray-200 p-2 rounded-xl hover:bg-gray-300">
             <Link to="/products">محصولات</Link>
           </li>
-          <li className="bg-green-600 text-green-50 p-2 rounded-xl hover:bg-green-800">
+          <li className="btn btn-success">
             <Link to="/products/create">ایجاد محصول جدید</Link>
           </li>
           <li className="flex-auto"></li>

@@ -55,13 +55,34 @@ const ProductsListPage: React.FC<ProductsListPageProps> = ({}) => {
 
               <div className="flex-auto"></div>
               <div className="flex gap-2">
-                <button type="button" onClick={() => cartCtx.addToCart(item.id,item.qty)}>
-                  <FontAwesomeIcon icon={faAdd} />
-                </button>
-                <span>0</span>
-                <button>
-                  <FontAwesomeIcon icon={faMinus} />
-                </button>
+                {cartCtx.getItemRequestedQty(item.id) <= 0 && (
+                  <button
+                    type="button"
+                    className="btn btn-xs btn-primary"
+                    onClick={() => cartCtx.addToCart(item.id, item.qty)}
+                  >
+                    <FontAwesomeIcon icon={faAdd} />
+                    افزودن به سبد
+                  </button>
+                )}
+
+                {cartCtx.getItemRequestedQty(item.id) > 0 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => cartCtx.addToCart(item.id, item.qty)}
+                    >
+                      <FontAwesomeIcon icon={faAdd} className="text-green-600" />
+                    </button>
+                    <span>{cartCtx.getItemRequestedQty(item.id)}</span>
+                    <button
+                      type="button"
+                      onClick={() => cartCtx.removeFromCart(item.id)}
+                    >
+                      <FontAwesomeIcon icon={faMinus} className="text-red-600" />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
