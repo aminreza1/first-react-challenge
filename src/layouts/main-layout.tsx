@@ -1,8 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBasket, faShoppingCart, faSignIn, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShoppingBasket,
+  faShoppingCart,
+  faSignIn,
+  faSignOut,
+} from "@fortawesome/free-solid-svg-icons";
 import { CartContext } from "../contexts/cart-context/cart-context";
 
 type MainLayoutProps = {
@@ -10,45 +15,87 @@ type MainLayoutProps = {
 };
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
   return (
-    <div className="p-3">
-      <div className="flex flex-col">
-        <h1 className="text-2xl">فروشگاه من</h1>
+    <div className="">
 
-        <ul className="flex flex-row gap-4 p-4 m-2 border-2 rounded-xl items-center">
-          <li className="bg-gray-200 p-2 rounded-xl hover:bg-gray-300">
-            <Link to="/">صفحه اصلی</Link>
-          </li>
-          <li className="bg-gray-200 p-2 rounded-xl hover:bg-gray-300">
-            <Link to="/products">محصولات</Link>
-          </li>
-          <li className="btn btn-success">
-            <Link to="/products/create">ایجاد محصول جدید</Link>
-          </li>
-          <li className="flex-auto"></li>
-          {!authCtx.authData.isAuth && (
-            <li onClick={authCtx.login} className="text-green-600 cursor-pointer">
-             <FontAwesomeIcon icon={faSignIn} />
-            </li>
-          )}
+
+      <div className="navbar bg-base-300 border-b border-b-gray-400 shadow-lg">
+        <div className="flex-1">
+          <a className="btn btn-ghost text-xl">فـروشگاه مـن</a>
+
+          <Link to="/" className="btn btn-ghost text-sm">
+            صفحه اصلی
+          </Link>
+          <Link to="/products" className="btn btn-ghost text-sm">
+            محصـولات
+          </Link>
           {authCtx.authData.isAuth && (
-            <>
-              <li>{authCtx.authData.user.name}</li>
-              <li onClick={authCtx.logout} className="text-red-600 cursor-pointer">
-              <FontAwesomeIcon icon={faSignOut} />
-              </li>
-            </>
+            <Link
+              to="/products/create"
+              className="btn btn-ghost text-sm text-green-600"
+            >
+              ایجاد محصول
+            </Link>
           )}
-          <li>|</li>
-          <li className="flex items-center gap-2">
-            <span>({cartCtx.cartData.length})</span>
-            <FontAwesomeIcon icon={faShoppingCart} />
-          </li>
-        </ul>
+
+          {/* <a className="btn btn-ghost text-sm">صفحه اصلی</a>
+          <a className="btn btn-ghost text-sm">محصولات</a> */}
+        </div>
+        <div className="flex-none">
+          <div role="button" className="btn btn-ghost ps-6 pe-3">
+            <div className="indicator">
+              <FontAwesomeIcon icon={faShoppingCart} className="h-5 w-5" />
+              <span className="badge badge-sm indicator-item p-2 text-sm">
+                {cartCtx.cartData.length}
+              </span>
+            </div>
+          </div>
+
+          {!authCtx.authData.isAuth ? (
+            <div
+              role="button"
+              onClick={authCtx.login}
+              className="btn btn-ghost cursor-pointer"
+            >
+              <FontAwesomeIcon icon={faSignIn} className="w-4 h-4" />
+            </div>
+          ) : (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <span className="justify-between text-blue-600">{authCtx.authData.user.name} خوش آمدید</span>
+                </li>
+                <li>
+                  <a>حساب کاربری</a>
+                </li>
+                <li onClick={authCtx.logout}>
+                  <span>خروج از سیستم</span>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="p-4">{children}</div>
+
+      <div className="p-6">{children}</div>
     </div>
   );
 };

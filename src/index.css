@@ -4,11 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    html{
-        direction: rtl;
-    }
-    *{
-        font-family: "IRANSansX";
-    }
+html {
+  direction: rtl;
 }
+* {
+  font-family: "IRANSansX";
+}
+

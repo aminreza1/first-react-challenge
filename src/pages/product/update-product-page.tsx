@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HttpService } from "../../services/http-service";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductsListDTO } from "../../dtos/product/products-list-dto";
 import { UpdateProductDTO } from "../../dtos/product/update-product-dto";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../contexts/auth-context";
 
 const UpdateProductPage: React.FC = ({}) => {
   const navigate = useNavigate();
   const params = useParams();
+  const authCtx = useContext(AuthContext);
+
 
   const [product, setProduct] = useState({
     title: "",
@@ -44,6 +49,16 @@ const UpdateProductPage: React.FC = ({}) => {
       });
   };
 
+  if (!authCtx.authData.isAuth)
+    return (
+      <div className="flex">
+        <div role="alert" className="alert alert-warning">
+          <FontAwesomeIcon icon={faTriangleExclamation} className="w-5 h-5"/>
+          <span>شما مجوز استفاده از این صفحه را ندارید.</span>
+        </div>
+      </div>
+    );
+  else
   return (
     <div className="flex flex-col">
       <h1 className="text-xl">ایجاد محصول جدید</h1>

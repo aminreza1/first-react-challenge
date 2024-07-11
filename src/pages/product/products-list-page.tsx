@@ -35,7 +35,7 @@ const ProductsListPage: React.FC<ProductsListPageProps> = ({}) => {
       <h1 className="text-xl mb-4">لیست محصولات</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  xl:grid-cols-5 gap-[20px]">
         {products.map((item) => (
-          <div className="flex flex-col gap-1 p-2 border-2 rounded-lg">
+          <div className="flex flex-col gap-2 p-2 border-2 rounded-lg">
             <img src={imagePlaceholder} alt="" className="rounded-lg m-2" />
             <h2>{item.title}</h2>
             <h3 className="text-green-700 font-bold">
