@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/auth-context";
+import { AuthContext } from "../contexts/auth-context/auth-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShoppingBasket,
@@ -20,8 +20,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const cartCtx = useContext(CartContext);
   return (
     <div className="">
-
-
       <div className="navbar bg-base-300 border-b border-b-gray-400 shadow-lg">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">فـروشگاه مـن</a>
@@ -57,7 +55,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           {!authCtx.authData.isAuth ? (
             <div
               role="button"
-              onClick={authCtx.login}
+              onClick={() => authCtx.login("12315646", 1, "امین رضا")}
               className="btn btn-ghost cursor-pointer"
             >
               <FontAwesomeIcon icon={faSignIn} className="w-4 h-4" />
@@ -81,7 +79,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <span className="justify-between text-blue-600">{authCtx.authData.user.name} خوش آمدید</span>
+                  <span className="justify-between text-blue-600">
+                    {authCtx.authData.user.name} خوش آمدید
+                  </span>
                 </li>
                 <li>
                   <a>حساب کاربری</a>

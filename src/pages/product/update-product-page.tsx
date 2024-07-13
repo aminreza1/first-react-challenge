@@ -5,7 +5,7 @@ import { ProductsListDTO } from "../../dtos/product/products-list-dto";
 import { UpdateProductDTO } from "../../dtos/product/update-product-dto";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { AuthContext } from "../../contexts/auth-context";
+import { AuthContext } from "../../contexts/auth-context/auth-context";
 
 const UpdateProductPage: React.FC = ({}) => {
   const navigate = useNavigate();

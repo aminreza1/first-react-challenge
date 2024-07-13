@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { HttpService } from "../../services/http-service";
 import { useNavigate } from "react-router-dom";
 import { CreateProductDTO } from "../../dtos/product/create-product-dto";
-import { AuthContext } from "../../contexts/auth-context";
+import { AuthContext } from "../../contexts/auth-context/auth-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
@@ -52,6 +52,7 @@ const CreateProductPage: React.FC<CreateProductPageProps> = ({}) => {
             <input
               type="text"
               name="title"
+             
               value={product.title}
               onChange={(e) =>
                 setProduct({ ...product, title: e.target.value })

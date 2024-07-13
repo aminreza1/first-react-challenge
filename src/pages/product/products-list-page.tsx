@@ -4,7 +4,7 @@ import { HttpService } from "../../services/http-service";
 import { ProductsListDTO } from "../../dtos/product/products-list-dto";
 import imagePlaceholder from "../../assets/images/Placeholder.webp";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/auth-context";
+import { AuthContext } from "../../contexts/auth-context/auth-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faMinus, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { CartContext } from "../../contexts/cart-context/cart-context";
@@ -35,7 +35,7 @@ const ProductsListPage: React.FC<ProductsListPageProps> = ({}) => {
       <h1 className="text-xl mb-4">لیست محصولات</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  xl:grid-cols-5 gap-[20px]">
         {products.map((item) => (
-          <div className="flex flex-col gap-2 p-2 border-2 rounded-lg">
+          <div className="flex flex-col gap-2 p-2 border-2 rounded-lg justify-between">
             <img src={imagePlaceholder} alt="" className="rounded-lg m-2" />
             <h2>{item.title}</h2>
             <h3 className="text-green-700 font-bold">
